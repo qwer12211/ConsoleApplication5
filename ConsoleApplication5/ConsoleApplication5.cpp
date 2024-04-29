@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -12,13 +12,13 @@ private:
     int sdanixRabor;
     int neSdanixRabot;
 public:
-    Student(const string& group) : groupName(group), sdanixRabor(0), neSdanixRabot(0) {}
+    Student(string group) : groupName(group), sdanixRabor(0), neSdanixRabot(0) {}
 
     vector<string> getSubjects() const {
         return subjects;
     }
 
-    void addSubject(const string& subject) {
+    void addSubject(string subject) {
         if (subjects.end() == find(subjects.begin(), subjects.end(), subject))
             subjects.push_back(subject);
         else
@@ -42,7 +42,7 @@ public:
         }
     }
 
-    void undoSubmission() {
+    void getSdanixRabor() {
         if (sdanixRabor > 0) {
             sdanixRabor--;
         }
@@ -51,7 +51,7 @@ public:
         }
     }
 
-    int getDebtsCount() const {
+    int getNeSdanixRabot() const {
         return neSdanixRabot;
     }
 
@@ -90,9 +90,9 @@ private:
     vector<Student> students;
     vector<Teacher> teachers;
 public:
-    Group(const string& name) : name(name) {}
+    Group(const string name) : name(name) {}
 
-    vector<Student>& getStudents() {
+    vector<Student> getStudents() {
         return students;
     }
 
@@ -115,19 +115,19 @@ private:
 public:
     vector<Group> groups;
 
-    void addGroup(const Group& group) {
+    void addGroup(const Group group) {
         groups.push_back(group);
     }
 
-    void addTeacher(const Teacher& teacher) {
+    void addTeacher(const Teacher teacher) {
         teachers.push_back(teacher);
     }
 
-    void addWork(Student& student) {
+    void addWork(Student student) {
         student.addSdanixRabor();
     }
 
-    void addDolg(Student& student) {
+    void addDolg(Student student) {
         student.addNesdanixRabot();
     }
 
@@ -135,7 +135,7 @@ public:
         cout << "Количество студентов в группе " << group.getName() << ": " << group.getStudents().size() << endl;
     }
 
-    void showStudentInfo(const Student& student) {
+    void showStudentInfo(const Student student) {
         cout << "Информация о студенте:" << endl;
         cout << "Название группы: " << student.getGroupName() << endl;
         cout << "Дисциплины: ";
@@ -144,7 +144,7 @@ public:
         }
         cout << endl;
         cout << "Количество выполненных работ: " << student.getCompletedAssignments() << endl;
-        cout << "Количество долгов: " << student.getDebtsCount() << endl;
+        cout << "Количество долгов: " << student.getNeSdanixRabot() << endl;
     }
 
     void showAllStudentsInfo() {
@@ -185,7 +185,9 @@ public:
 
 int main() {
     setlocale(LC_ALL, "RUS");
-
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    setlocale(0, "");
     MPT MPT;
 
     string group_name;
@@ -223,7 +225,7 @@ int main() {
     char choice;
 
     do {
-        cout << " 1 - Доюавить работу группе\n 2 - Добавить долг группе\n 3 - Посмотреть количество студентов в группе\n 4 - Показать информацию о группе\n 5 - Добавить студента в группу\n 6 - Добавить новую группу\n 7 - Показать все группы\n 8 - Добавить новую дисциплину\n 9 - Удалить долги группе\n 10 - Отметить практическую работу выполненной\n 11 - Завершить\n";
+        cout << " \n1 - Добавить работу группе\n 2 - Добавить долг группе\n 3 - Посмотреть количество студентов в группе\n 4 - Показать информацию о группе\n 5 - Добавить студента в группу\n 6 - Добавить новую группу\n 7 - Показать все группы\n 8 - Добавить новую дисциплину\n 9 - Удалить долги группе\n 10 - Отметить практическую работу выполненной\n 11 - Завершить\n";
         cin >> choice;
 
         switch (choice) {
@@ -295,7 +297,7 @@ int main() {
             student1.yaProshauTeba();
             break;
         case 's':
-            student1.undoSubmission();
+            student1.getSdanixRabor();
             cout << "\nСтуденты выполнили практическую работу\n";
             break;
         case 'q':
